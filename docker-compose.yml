@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: sh -c "pnpm install && pnpm dev --host 0.0.0.0"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - CI=true
+    depends_on:
+      - backend
