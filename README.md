@@ -31,6 +31,7 @@ The application will be available at: [http://localhost:5173/](http://localhost:
 - Created multiple CSVs (valid and invalid) to test application constraints.
 - I used type hints and TypeScript for a safer system.
 - Also Tested the bundle on other PCs to ensure smooth delivery.
+- Added loggers to the application for easier debugging
 
 **If this application was destined for a production environment, what would you add or change?**
 
