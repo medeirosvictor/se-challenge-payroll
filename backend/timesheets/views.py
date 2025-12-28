@@ -20,10 +20,13 @@ def health_check(request):
 @api_view(['POST'])
 def add_time_report(request):
     logger.info("Time report upload initiated")
-    logger.debug(f"Request FILES: {request}")
     if 'file' not in request.FILES:
         return Response({'status': 'error', 'message': 'No file provided'}, status=400)
-    service_add_time_report(request.FILES['file'])
+    file = request.FILES['file']
+    if not file.name.lower().endswith('.csv'):
+        return Response({'status': 'error', 'message': 'Invalid file format. Please upload a CSV file.'}, status=400)
+    logger.info(f"Uploading time report file: {file.name}")
+    service_add_time_report(file)
     return Response({
         'status': 'success',
         'message': 'Time report added successfully!'

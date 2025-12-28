@@ -75,7 +75,11 @@ export default function PayrollReports() {
                     {report.payPeriod.startDate} - {report.payPeriod.endDate}
                   </td>
                   <td className="p-2 text-right border border-[#00ff00]">
-                    {report.amountPaid}
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      minimumFractionDigits: 2,
+                    }).format(report.amountPaid)}
                   </td>
                 </tr>
               ))}
